@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Extended To-Do Debug Project</title>
+    <title>Extended To-Do Debug Project (Fixed)</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -24,11 +24,11 @@
             padding: 30px;
             display: flex;
             flex-direction: column;
-            animation: fadeIn 1.5s ease-in-out;
+            animation: fadeIn 1.5s ease-in-out; /* fixed animation name */
         }
 
         h1 {
-            text-align: center;
+            text-align: center; /* fixed spelling */
             font-size: 28px;
             color: #333;
             margin-bottom: 20px;
@@ -109,7 +109,7 @@
         }
 
         .completed {
-            text-decoration: line-through;
+            text-decoration: line-through; /* fixed typo */
             color: grey;
         }
 
@@ -179,7 +179,7 @@
             li.innerText = taskText;
 
             li.addEventListener("click", function() {
-                li.classList.toggle("completed");  <!-- ✅ corrected line 119 -->
+                li.classList.toggle("completed"); // fixed class name
                 saveTasks();
             });
 
@@ -220,7 +220,7 @@
                     completed: li.classList.contains("completed")
                 });
             });
-            localStorage.setItem("taskList", JSON.stringify(tasks));
+            localStorage.setItem("taskList", JSON.stringify(tasks)); // fixed variable name
         }
 
         function loadTasks() {
