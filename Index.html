@@ -24,11 +24,11 @@
             padding: 30px;
             display: flex;
             flex-direction: column;
-            animation: fadeInn 1.5s ease-in-out; /* ERROR: wrong animation name */
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         h1 {
-            text-align: cneter;
+            text-align: center;
             font-size: 28px;
             color: #333;
             margin-bottom: 20px;
@@ -109,7 +109,7 @@
         }
 
         .completed {
-            text-decoration: line-throgh;
+            text-decoration: line-through;
             color: grey;
         }
 
@@ -179,7 +179,7 @@
             li.innerText = taskText;
 
             li.addEventListener("click", function() {
-                li.classList.toggle("completedTask");
+                li.classList.toggle("completed");  <!-- ✅ corrected line 119 -->
                 saveTasks();
             });
 
@@ -205,17 +205,9 @@
                 if (filter === "all") {
                     task.style.display = "flex";
                 } else if (filter === "active") {
-                    if (task.classList.contains("completed")) {
-                        task.style.display = "none";
-                    } else {
-                        task.style.display = "flex";
-                    }
+                    task.style.display = task.classList.contains("completed") ? "none" : "flex";
                 } else if (filter === "completed") {
-                    if (task.classList.contains("completed")) {
-                        task.style.display = "flex";
-                    } else {
-                        task.style.display = "none";
-                    }
+                    task.style.display = task.classList.contains("completed") ? "flex" : "none";
                 }
             });
         }
@@ -228,7 +220,7 @@
                     completed: li.classList.contains("completed")
                 });
             });
-            localStorage.setItem("taskList", JSON.stringify(task)); // ERROR: wrong variable name
+            localStorage.setItem("taskList", JSON.stringify(tasks));
         }
 
         function loadTasks() {
@@ -239,6 +231,7 @@
                     const li = document.createElement("li");
                     li.innerText = t.text;
                     if (t.completed) li.classList.add("completed");
+
                     const delBtn = document.createElement("button");
                     delBtn.innerText = "Delete";
                     delBtn.className = "deleteBtn";
@@ -247,19 +240,20 @@
                         li.remove();
                         saveTasks();
                     });
+
                     li.appendChild(delBtn);
+
                     li.addEventListener("click", function() {
-                        li.classList.toggle("completedTask");
+                        li.classList.toggle("completed");
                         saveTasks();
                     });
+
                     taskList.appendChild(li);
                 });
             }
         }
 
         loadTasks();
-
-        nonExistingFunctionCall();
     </script>
 </body>
 </html>
